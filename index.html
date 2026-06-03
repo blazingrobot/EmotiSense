@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmotiSense – Socio-Emotional Learning for ASD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== STAR BURST CONTAINER ===== -->
+  <div class="stars-wrap" id="starsWrap"></div>
+
+  <!-- ===== FEEDBACK OVERLAY ===== -->
+  <div class="feedback-overlay" id="feedbackOverlay">
+    <div class="feedback-box">
+      <span class="feedback-emoji" id="feedbackEmoji"></span>
+      <div class="feedback-text"  id="feedbackText"></div>
+      <div class="feedback-sub"   id="feedbackSub"></div>
+      <button class="feedback-next" id="feedbackNextBtn">Continue ➜</button>
+    </div>
+  </div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div class="nav-logo" onclick="showPage('home')">
+      Emoti<span class="logo-emoji">😊</span><span class="logo-span">Sense</span>
+    </div>
+    <ul>
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('explore')">Explore</a></li>
+      <li><a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('activities-anchor').scrollIntoView({behavior:'smooth'}),300)">Activities</a></li>
+      <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div id="page-home" class="page active">
+
+    <section class="hero">
+      <div class="hero-bubbles" id="heroBubbles"></div>
+      <div class="hero-logo">
+        <img src="./Assets/logo.png" alt="EmotiSense Logo" class="logo-img">
+    </div>
+      <p class="hero-tagline">
+        A free, web-based assistive tool designed to support socio-emotional learning
+        for learners with Autism Spectrum Disorder (ASD)
+      </p>
+      <a href="#" class="btn-primary btn-hero"
+         onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth'})">
+        ✨ Learn More
+      </a>
+    </section>
+
+    <section class="about-section" id="about-section">
+      <h2 class="section-title">About EmotiSense 💙</h2>
+      <p class="section-subtitle">
+        EmotiSense is a free web-based assistive learning platform designed to support the
+        socio-emotional learning of Filipino children with Autism Spectrum Disorder (ASD).
+        It provides a safe, interactive, and beginner-friendly environment for learners aged 6–12.
+      </p>
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-icon">🎯</span>
+          <h3>What We Offer</h3>
+          <p>Emotion recognition mini-games, guided social situation simulations, and calming activities using culturally appropriate Filipino-based content.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">💛</span>
+          <h3>Our Purpose</h3>
+          <p>Supporting learners, parents, caregivers, and SPED teachers through accessible socio-emotional learning tools — as an educational support system.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🤝</span>
+          <h3>Who We Help</h3>
+          <p>Designed for parents, caregivers, SPED teachers, therapists, and psychiatrists to monitor and support learners with ASD aged 6–12.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="activities-section" id="activities-anchor">
+      <h2 class="section-title">Interactive Activities 🎮</h2>
+      <p class="section-subtitle">
+        Three thoughtfully designed modules that guide learners through emotions, social skills, and calming strategies.
+      </p>
+
+      <div class="activity-cards-grid">
+
+        <div class="activity-card">
+          <span class="ac-icon">🎭</span>
+          <h3 class="ac-title">Emotion Games</h3>
+          <p class="ac-desc">
+            Interactive mini-games that help learners recognize and understand the six basic emotions:
+            happiness, sadness, anger, fear, disgust, and surprise. Activities include animated
+            flashcards, facial expression matching, and real-life situation analysis.
+          </p>
+        </div>
+
+        <div class="activity-card">
+          <span class="ac-icon">🤝</span>
+          <h3 class="ac-title">Social Simulations</h3>
+          <p class="ac-desc">
+            Guided scenarios that teach appropriate social responses and decision-making skills.
+            Learners practice empathy and kindness through real-life Filipino-based situations
+            such as helping an elderly person cross the street or supporting a classmate in need.
+          </p>
+        </div>
+
+        <div class="activity-card">
+          <span class="ac-icon">🌊</span>
+          <h3 class="ac-title">Calming Activities</h3>
+          <p class="ac-desc">
+            Simple activities that support relaxation and emotional self-regulation.
+            Includes guided breathing exercises with soothing ocean wave sounds
+            and interactive fidget-inspired activities to help learners stay calm and focused.
+          </p>
+        </div>
+
+      </div>
+
+      <button class="btn-primary" style="font-size:1.2rem;padding:18px 52px;" onclick="showPage('learning')">
+        🚀 Start Learning
+      </button>
+    </section>
+
+    <footer>
+      <div class="footer-logo">EmotiSense</div>
+      <p class="footer-tagline">Building brighter, empathetic futures.</p>
+      <div class="footer-divider"></div>
+      <p class="footer-info">
+        © 2026 EmotiSense Foundation. All rights reserved.<br>
+        contact@emotiscense.com | +63 (2) 8123 4567
+      </p>
+    </footer>
+  </div>
+
+  <!-- EXPLORE PAGE -->
+  <div id="page-explore" class="page">
+    <div class="explore-hero">
+      <h2 class="section-title">Explore EmotiSense 🔍</h2>
+      <p class="section-subtitle">Discover everything our platform has to offer for socio-emotional growth.</p>
+    </div>
+    <div class="explore-grid">
+      <div class="explore-card"><div class="ec-emoji">😊</div><h3>Emotion Recognition</h3><p>Learn to identify 6 basic emotions through fun animated flashcards and matching games.</p></div>
+      <div class="explore-card"><div class="ec-emoji">🤝</div><h3>Social Simulations</h3><p>Practice real-life social scenarios through guided decisions and empathy-building activities.</p></div>
+      <div class="explore-card"><div class="ec-emoji">🌊</div><h3>Calming Activities</h3><p>Breathing exercises with soothing ocean wave sounds and fidget-inspired activities to stay calm.</p></div>
+      <div class="explore-card"><div class="ec-emoji">📊</div><h3>Progress Reports</h3><p>View detailed scores per activity after each session. Download as a PDF for caregivers or therapists.</p></div>
+      <div class="explore-card"><div class="ec-emoji">🇵🇭</div><h3>Filipino Content</h3><p>All activities use culturally appropriate Filipino-based scenarios, making learning relatable.</p></div>
+      <div class="explore-card"><div class="ec-emoji">🆓</div><h3>Completely Free</h3><p>No sign-up required. No subscriptions. EmotiSense is free and accessible to everyone.</p></div>
+    </div>
+    <footer>
+      <div class="footer-logo">EmotiSense</div>
+      <p class="footer-tagline">Building brighter, empathetic futures.</p>
+      <div class="footer-divider"></div>
+      <p class="footer-info">© 2026 EmotiSense Foundation. All rights reserved.<br>contact@emotiscense.com | +63 (2) 8123 4567</p>
+    </footer>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="page-contact" class="page">
+    <div class="contact-section">
+      <h2 class="section-title" style="margin-bottom:8px">Contact Us 💌</h2>
+      <p style="color:#5a6a7a;margin-bottom:32px;line-height:1.6;">Have questions or feedback? We'd love to hear from you — teachers, parents, therapists, and caregivers are all welcome.</p>
+      <div class="contact-form">
+        <div class="form-group"><label>Full Name</label><input type="text" placeholder="e.g. Maria Santos"></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="e.g. maria@email.com"></div>
+        <div class="form-group">
+          <label>Role</label>
+          <select><option>Parent / Guardian</option><option>SPED Teacher</option><option>Caregiver</option><option>Therapist</option><option>Psychiatrist</option><option>Other</option></select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us how we can help..."></textarea></div>
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="alert('Thank you! We will get back to you soon. 💙')">Send Message 📨</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-logo">EmotiSense</div>
+      <p class="footer-tagline">Building brighter, empathetic futures.</p>
+      <div class="footer-divider"></div>
+      <p class="footer-info">© 2026 EmotiSense Foundation. All rights reserved.<br>contact@emotiscense.com | +63 (2) 8123 4567</p>
+    </footer>
+  </div>
+
+  <!-- LEARNING PAGE -->
+  <div id="page-learning" class="page">
+
+    <div id="introScreen" class="intro-screen">
+      <div class="emi-avatar">🤖</div>
+      <div class="emi-bubble" id="emiBubble">Hello My friend, my name is EMI! Let's play a Game! 🎉</div>
+      <div id="nameInputWrap" class="hidden" style="width:100%;max-width:400px;text-align:center">
+        <input type="text" class="name-input" id="learnerName" placeholder="Type your name here..." maxlength="30">
+      </div>
+      <button class="btn-primary" id="introNextBtn" onclick="introNext()">Next ➜</button>
+    </div>
+
+    <div id="gameHub" class="game-hub">
+      <h2 class="hub-greeting" id="hubGreeting">Hello! 👋</h2>
+      <p class="hub-sub">Choose a module to begin your journey!</p>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+      <p class="progress-label" id="progressLabel">0 of 3 modules completed</p>
+      <div class="module-cards">
+        <div class="module-card" id="mod1Card" onclick="startModule(1)">
+          <span class="mc-icon">🎭</span>
+          <h3 class="mc-title">Module 1</h3>
+          <p class="mc-desc">Emotion Recognition Mini Games — Guess, Match &amp; Analyze!</p>
+        </div>
+        <div class="module-card locked" id="mod2Card">
+          <span class="lock-badge">🔒 Locked</span>
+          <span class="mc-icon">🤝</span>
+          <h3 class="mc-title">Module 2</h3>
+          <p class="mc-desc">Social Situation Simulations — Make good decisions!</p>
+        </div>
+        <div class="module-card locked" id="mod3Card">
+          <span class="lock-badge">🔒 Locked</span>
+          <span class="mc-icon">🌊</span>
+          <h3 class="mc-title">Module 3</h3>
+          <p class="mc-desc">Calming Activities — Breathe, relax, and feel better!</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameArea" class="game-area hidden">
+      <div class="game-header">
+        <button class="back-btn" onclick="backToHub()">← Back</button>
+        <span class="game-title" id="gameAreaTitle">Module 1</span>
+        <span class="score-badge">⭐ Score: <span id="currentScore">0</span></span>
+      </div>
+      <div id="gameContent"></div>
+    </div>
+
+  </div>
+
+  <!-- RESULTS PAGE -->
+  <div id="page-results" class="page">
+    <div class="results-page">
+      <div class="confetti-emoji">🎉</div>
+      <h1 class="results-title">Congratulations, <span class="results-name" id="resultsName"></span>!</h1>
+      <p style="color:#5a6a7a;font-size:1.1rem;margin-bottom:8px;">You finished all the modules! Job Well Done! 🌟</p>
+      <div class="overall-score" id="overallScore">0%</div>
+      <p class="overall-label">Overall Score</p>
+      <div class="score-cards">
+        <div class="score-card"><div class="sc-icon">🎭</div><div class="sc-label">Emotion Games</div><div class="sc-score" id="score1">0</div><div class="sc-total">/ 21 pts</div></div>
+        <div class="score-card"><div class="sc-icon">🤝</div><div class="sc-label">Social Simulations</div><div class="sc-score" id="score2">0</div><div class="sc-total">/ 8 pts</div></div>
+        <div class="score-card"><div class="sc-icon">🌊</div><div class="sc-label">Calming Activities</div><div class="sc-score" id="score3">10</div><div class="sc-total">/ 10 pts</div></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn-primary"   onclick="downloadPDF()">📄 Download PDF Report</button>
+        <button class="btn-secondary" onclick="showPage('home')">🏠 Back to Home</button>
+        <button class="btn-secondary" onclick="restartGame()">🔄 Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
