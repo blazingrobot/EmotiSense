@@ -364,14 +364,14 @@ const simScenarios = [
   {
     emoji: '👵🛒🚶',
     title: 'Lola sa Palengke',
-    desc: 'An old lola is carrying heavy bags of groceries from the palengke. She looks tired and is struggling to walk.',
+    desc: 'An old lola is carrying heavy bags of groceries from the palengke. She looks tired and is struggling to walk. The timer is running!',
     choices: [
       { text: '🤝 Help lola carry her bags and walk with her', correct: true  },
       { text: '🏃 Walk past quickly and ignore her',           correct: false },
       { text: '📱 Keep scrolling your phone',                  correct: false },
       { text: '😴 Pretend you did not notice her',             correct: false },
     ],
-    timer: false,
+    timer: true,
   },
   {
     emoji: '🏫👧📖',
@@ -411,6 +411,8 @@ const simScenarios = [
   },
 ];
 
+let simIdx           = 0;
+let simTimerInterval = null;
 
 function renderModule2() {
   simIdx = 0;
@@ -424,6 +426,8 @@ function renderSim() {
     return;
   }
 
+  clearInterval(simTimerInterval);
+  const s = simScenarios[simIdx];
 
   document.getElementById('gameContent').innerHTML = `
     <div style="text-align:center;margin-bottom:20px">
@@ -441,14 +445,6 @@ function renderSim() {
       </div>
     </div>`;
 
-  if (s.timer) {
-    simTimerInterval = setInterval(() => {
-      timeLeft--;
-      const el = document.getElementById('simTimer');
-      if (el) el.textContent = `⏱ ${timeLeft}s`;
-      if (timeLeft <= 0) { clearInterval(simTimerInterval); checkSim(-1, false); }
-    }, 1000);
-  }
 }
 
 function checkSim(idx, correct) {
