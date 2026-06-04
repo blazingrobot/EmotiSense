@@ -382,7 +382,7 @@ const simScenarios = [
   {
     emoji: '🎤😰📜',
     title: 'Nakalimutang Script sa Program',
-    desc: 'It is your school\'s Linggo ng Wika program. Your classmate forgot their spoken poetry piece and is about to go on stage. They look very panicked.',
+    vdesc: 'It is your school Linggo ng Wika program. Your classmate forgot their spoken poetry piece and is about to go on stage. They look very panicked.',
     choices: [
       { text: '📋 Share your copy and quietly help them rehearse', correct: true  },
       { text: '🤷 Say it is not your problem',                      correct: false },
