@@ -371,7 +371,7 @@ const simScenarios = [
       { text: '📱 Keep scrolling your phone',                  correct: false },
       { text: '😴 Pretend you did not notice her',             correct: false },
     ],
-    timer: true,
+    timer: false,
   },
   {
     emoji: '🏫👧📖',
