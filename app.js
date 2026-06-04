@@ -434,7 +434,6 @@ function renderSim() {
     <div class="sim-card">
       <div class="sim-scene">${s.emoji}</div>
       <h3 class="sim-title">${s.title}</h3>
-      ${s.timer ? `<div class="sim-timer" id="simTimer">⏱ ${timeLeft}s</div>` : ''}
       <p class="sim-desc">${s.desc}</p>
       <p style="font-weight:800;margin-bottom:16px">What is the BEST thing to do?</p>
       <div class="sim-choices">
