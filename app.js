@@ -306,7 +306,7 @@ const situations = [
   },
   {
     emoji: '🎂🎁😲', title: 'Surprise Birthday',
-    desc: 'A child walks into the house and all their relatives shout "Surprise!" for their birthday. There are balloons, bibingka, and gifts on the table!',
+    desc: 'A child walks into the house and all their relatives shout Surprise for their birthday. There are balloons, bibingka, and gifts on the table!',
     answer: 'surprise', choices: ['Happiness','Disgust','Surprise','Fear'],
   },
   {
