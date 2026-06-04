@@ -54,7 +54,7 @@ function createBubbles() {
 const introSteps = [
   { text: "Hello My friend, my name is EMI! Let's play a Game! 🎉", showInput: false },
   { text: "What should I call you? 😊",                              showInput: true  },
-  { text: '',                                                         showInput: false }, // dynamic
+  { text: '',                                                         showInput: false },
   { text: "Let's Start now! Are you ready? 🚀",                      showInput: false },
 ];
 
@@ -212,7 +212,7 @@ function renderGuessEmotion(round) {
 function checkGuess(chosen, answer, round) {
   document.querySelectorAll('.choice-btn').forEach(b => {
     b.disabled = true;
-    if (b.textContent.toLowerCase() === answer)                        b.classList.add('correct');
+    if (b.textContent.toLowerCase() === answer)                           b.classList.add('correct');
     else if (b.textContent.toLowerCase() === chosen && chosen !== answer) b.classList.add('wrong');
   });
   const correct = chosen === answer;
@@ -300,21 +300,27 @@ function matchClick(el, type) {
 /* ---------- Game 1c: Situation Analysis ---------- */
 const situations = [
   {
-    emoji: '🍚🎉👨‍👩‍👧‍👦', title: 'Fiesta sa Barangay',
+    emoji: '🍚🎉👨‍👩‍👧‍👦',
+    title: 'Fiesta sa Barangay',
     desc: 'It is the barangay fiesta! The whole family is eating lechon, dancing, and laughing together in the plaza. Everyone is happy and celebrating.',
-    answer: 'happiness', choices: ['Happiness','Sadness','Anger','Fear'],
+    answer: 'happiness',
+    choices: ['Happiness','Sadness','Anger','Fear'],
   },
   {
-    emoji: '🎂🎁😲', title: 'Surprise Birthday',
+    emoji: '🎂🎁😲',
+    title: 'Surprise Birthday',
     desc: 'A child walks into the house and all their relatives shout Surprise for their birthday. There are balloons, bibingka, and gifts on the table!',
-    answer: 'surprise', choices: ['Happiness','Disgust','Surprise','Fear'],
+    answer: 'surprise',
+    choices: ['Happiness','Disgust','Surprise','Fear'],
   },
   {
-    emoji: '⛈️🕯️😨', title: 'Bagyo sa Gabi',
-    desc: 'There is a strong bagyo (typhoon) at night. The electricity went out and a child is alone in the dark room hearing loud thunder and heavy rain hitting the roof.',
-    answer: 'fear', choices: ['Surprise','Fear','Sadness','Anger'],
+    emoji: '⛈️🕯️😨',
+    title: 'Bagyo sa Gabi',
+    desc: 'There is a strong bagyo at night. The electricity went out and a child is alone in the dark room hearing loud thunder and heavy rain hitting the roof.',
+    answer: 'fear',
+    choices: ['Surprise','Fear','Sadness','Anger'],
   },
-
+];
 
 function renderSituation(idx) {
   if (idx >= situations.length) { m1GameIdx++; renderM1Game(); return; }
@@ -358,7 +364,7 @@ const simScenarios = [
   {
     emoji: '👵🛒🚶',
     title: 'Lola sa Palengke',
-    desc: 'An old lola is carrying heavy bags of groceries from the palengke. She looks tired and is struggling to walk.',
+    desc: 'An old lola is carrying heavy bags of groceries from the palengke. She looks tired and is struggling to walk. The timer is running!',
     choices: [
       { text: '🤝 Help lola carry her bags and walk with her', correct: true  },
       { text: '🏃 Walk past quickly and ignore her',           correct: false },
@@ -370,10 +376,10 @@ const simScenarios = [
   {
     emoji: '🏫👧📖',
     title: 'Walang Kasama sa Grupo',
-    desc: 'Your teacher said to form groups for a activity, but one classmate is left alone with no group. She looks sad and embarrassed.',
+    desc: 'Your teacher said to form groups for an activity, but one classmate is left alone with no group. She looks sad and embarrassed.',
     choices: [
       { text: '💁 Invite her to join your group',          correct: true  },
-      { text: '🙈 Ignore her and stay with your barkada', correct: false },
+      { text: '🙈 Ignore her and stay with your barkada',  correct: false },
       { text: '😂 Laugh and whisper to your friends',      correct: false },
       { text: '🏃 Pretend you did not see her',            correct: false },
     ],
@@ -382,22 +388,22 @@ const simScenarios = [
   {
     emoji: '🎤😰📜',
     title: 'Nakalimutang Script sa Program',
-    vdesc: 'It is your school Linggo ng Wika program. Your classmate forgot their spoken poetry piece and is about to go on stage. They look very panicked.',
+    desc: 'It is your school Linggo ng Wika program. Your classmate forgot their spoken poetry piece and is about to go on stage. They look very panicked.',
     choices: [
       { text: '📋 Share your copy and quietly help them rehearse', correct: true  },
-      { text: '🤷 Say it is not your problem',                      correct: false },
-      { text: '😂 Laugh and tell others about it',                  correct: false },
-      { text: '📢 Tell the teacher without offering to help',       correct: false },
+      { text: '🤷 Say it is not your problem',                     correct: false },
+      { text: '😂 Laugh and tell others about it',                 correct: false },
+      { text: '📢 Tell the teacher without offering to help',      correct: false },
     ],
     timer: false,
   },
   {
     emoji: '🍚🧹🏠',
     title: 'Tulong sa Bahay',
-    desc: 'After dinner, your nanay asks you to wash the dishes and sweep the floor. You are tired from school but you can see she just came home from a long day of work.',
+    desc: 'After dinner, your nanay asks you to wash the dishes and sweep the floor. You are tired from school but she just came home from a long day of work.',
     choices: [
-      { text: '🧽 Help po, nanay! and do your best',  correct: true  },
-      { text: '📺 Say you are watching your telenovela', correct: false },
+      { text: '🧽 Help po nanay and do your best',       correct: true  },
+      { text: '📺 Say you are busy watching telenovela', correct: false },
       { text: '😤 Complain and go to your room',         correct: false },
       { text: '🛌 Pretend to be asleep on the couch',    correct: false },
     ],
@@ -405,7 +411,7 @@ const simScenarios = [
   },
 ];
 
-let simIdx          = 0;
+let simIdx           = 0;
 let simTimerInterval = null;
 
 function renderModule2() {
@@ -433,20 +439,30 @@ function renderSim() {
     <div class="sim-card">
       <div class="sim-scene">${s.emoji}</div>
       <h3 class="sim-title">${s.title}</h3>
+      ${s.timer ? `<div class="sim-timer" id="simTimer">⏱ ${timeLeft}s</div>` : ''}
       <p class="sim-desc">${s.desc}</p>
       <p style="font-weight:800;margin-bottom:16px">What is the BEST thing to do?</p>
       <div class="sim-choices">
         ${s.choices.map((c, i) => `<button class="sim-choice" onclick="checkSim(${i},${c.correct})">${c.text}</button>`).join('')}
       </div>
     </div>`;
+
+  if (s.timer) {
+    simTimerInterval = setInterval(() => {
+      timeLeft--;
+      const el = document.getElementById('simTimer');
+      if (el) el.textContent = `⏱ ${timeLeft}s`;
+      if (timeLeft <= 0) { clearInterval(simTimerInterval); checkSim(-1, false); }
+    }, 1000);
+  }
 }
 
 function checkSim(idx, correct) {
   clearInterval(simTimerInterval);
   document.querySelectorAll('.sim-choice').forEach((b, i) => {
     b.disabled = true;
-    if (simScenarios[simIdx].choices[i].correct)        b.classList.add('correct');
-    else if (i === idx && !correct)                      b.classList.add('wrong');
+    if (simScenarios[simIdx].choices[i].correct) b.classList.add('correct');
+    else if (i === idx && !correct)              b.classList.add('wrong');
   });
   if (correct) { addScore(2); spawnStars(window.innerWidth / 2, 300); }
   showFeedback(correct, () => { simIdx++; renderSim(); });
@@ -456,12 +472,12 @@ function checkSim(idx, correct) {
    MODULE 3 — CALMING ACTIVITIES
    ============================================================ */
 
-let breathPhase   = 'idle';
-let breathTimer   = null;
+let breathPhase    = 'idle';
+let breathTimer    = null;
 let isOceanPlaying = false;
-let audioCtx      = null;
-let oceanSource   = null;
-let oceanGain     = null;
+let audioCtx       = null;
+let oceanSource    = null;
+let oceanGain      = null;
 
 function renderModule3() {
   document.getElementById('gameContent').innerHTML = `
@@ -574,7 +590,7 @@ function playOceanWaves() {
     oceanGain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 2);
 
     const filter = audioCtx.createBiquadFilter();
-    filter.type           = 'lowpass';
+    filter.type            = 'lowpass';
     filter.frequency.value = 400;
 
     const lfo     = audioCtx.createOscillator();
@@ -629,7 +645,6 @@ function finishModule(n) {
   if (n === 1) unlockModule(2);
   if (n === 2) unlockModule(3);
 
-  // Badge
   const card = document.getElementById('mod' + n + 'Card');
   if (!card.querySelector('.mc-badge')) {
     const badge = document.createElement('span');
@@ -676,7 +691,7 @@ function downloadPDF() {
   const html = `
     <html>
     <head>
-      <title>EmotiSense Report — ${s.learnerName}</title>
+      <title>EmotiSense Report</title>
       <style>
         body { font-family: Arial, sans-serif; padding: 40px; color: #2C3E50; }
         h1   { color: #5DADE2; margin-bottom: 4px; }
@@ -694,16 +709,16 @@ function downloadPDF() {
       <h2>Learner: <strong>${s.learnerName}</strong> &nbsp;|&nbsp; Date: ${date}</h2>
       <table>
         <tr><th>Module</th><th>Activity</th><th>Score</th><th>Total</th></tr>
-        <tr><td>Module 1</td><td>🎭 Emotion Recognition</td><td>${s.scores[0]}</td><td>21</td></tr>
-        <tr><td>Module 2</td><td>🤝 Social Simulations</td><td>${s.scores[1]}</td><td>8</td></tr>
-        <tr><td>Module 3</td><td>🌊 Calming Activities</td><td>${s.scores[2]}</td><td>10</td></tr>
+        <tr><td>Module 1</td><td>Emotion Recognition</td><td>${s.scores[0]}</td><td>21</td></tr>
+        <tr><td>Module 2</td><td>Social Simulations</td><td>${s.scores[1]}</td><td>8</td></tr>
+        <tr><td>Module 3</td><td>Calming Activities</td><td>${s.scores[2]}</td><td>10</td></tr>
       </table>
-      <p class="total">Overall Score: ${total}/39 &nbsp;(${pct}%)</p>
-      <p class="remark">${pct >= 80 ? '⭐ Excellent performance!' : pct >= 60 ? '👍 Good job! Keep practicing.' : '💪 Keep going! Practice makes perfect.'}</p>
+      <p class="total">Overall Score: ${total}/39 (${pct}%)</p>
+      <p class="remark">${pct >= 80 ? 'Excellent performance!' : pct >= 60 ? 'Good job! Keep practicing.' : 'Keep going! Practice makes perfect.'}</p>
       <div class="footer">
         <p>EmotiSense | Building brighter, empathetic futures.</p>
         <p>contact@emotiscense.com | +63 (2) 8123 4567</p>
-        <p>© 2026 EmotiSense Foundation. This report is for educational purposes only and does not replace professional therapy, diagnosis, or clinical treatment.</p>
+        <p>2026 EmotiSense Foundation. This report is for educational purposes only and does not replace professional therapy, diagnosis, or clinical treatment.</p>
       </div>
     </body>
     </html>`;
@@ -715,11 +730,11 @@ function downloadPDF() {
 }
 
 function restartGame() {
-  state.learnerName        = '';
-  state.introStep          = 0;
-  state.modulesCompleted   = [false, false, false];
-  state.scores             = [0, 0, 10];
-  state.currentScore       = 0;
+  state.learnerName      = '';
+  state.introStep        = 0;
+  state.modulesCompleted = [false, false, false];
+  state.scores           = [0, 0, 10];
+  state.currentScore     = 0;
 
   ['mod1Card','mod2Card','mod3Card'].forEach((id, i) => {
     const c = document.getElementById(id);
@@ -736,14 +751,14 @@ function restartGame() {
     }
   });
 
-  document.getElementById('progressBar').style.width    = '0%';
-  document.getElementById('progressLabel').textContent  = '0 of 3 modules completed';
+  document.getElementById('progressBar').style.width   = '0%';
+  document.getElementById('progressLabel').textContent = '0 of 3 modules completed';
   document.getElementById('gameHub').classList.remove('active');
   document.getElementById('gameArea').classList.add('hidden');
-  document.getElementById('introScreen').style.display  = '';
-  document.getElementById('emiBubble').textContent      = "Hello My friend, my name is EMI! Let's play a Game! 🎉";
+  document.getElementById('introScreen').style.display = '';
+  document.getElementById('emiBubble').textContent     = "Hello My friend, my name is EMI! Let's play a Game! 🎉";
   document.getElementById('nameInputWrap').classList.add('hidden');
-  document.getElementById('introNextBtn').textContent   = 'Next ➜';
+  document.getElementById('introNextBtn').textContent  = 'Next ➜';
   state.introStep = 0;
   showPage('learning');
 }
@@ -751,16 +766,14 @@ function restartGame() {
 /* ============================================================
    UTILITY
    ============================================================ */
-function shuffle(arr)    { return arr.sort(() => Math.random() - 0.5); }
-function capitalize(s)   { return s.charAt(0).toUpperCase() + s.slice(1); }
+function shuffle(arr)  { return arr.sort(() => Math.random() - 0.5); }
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 /* ============================================================
    INIT
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   createBubbles();
-
-  // Feedback next button
   document.getElementById('feedbackNextBtn').addEventListener('click', () => {
     document.getElementById('feedbackOverlay').classList.remove('show');
     if (state.feedbackCallback) state.feedbackCallback();
