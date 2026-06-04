@@ -11,6 +11,7 @@ const state = {
   scores: [0, 0, 10],
   currentScore: 0,
   feedbackCallback: null,
+  currentGameStep: 0, // Added missing property
 };
 
 /* ===== EMOTIONS DATA ===== */
@@ -26,8 +27,11 @@ const emotions = [
 /* ===== PAGE NAVIGATION ===== */
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  window.scrollTo(0, 0);
+  const page = document.getElementById('page-' + name);
+  if (page) {
+    page.classList.add('active');
+    window.scrollTo(0, 0);
+  }
 }
 
 /* ===== FLOATING BUBBLES (Hero) ===== */
@@ -62,9 +66,10 @@ function introNext() {
   const step = state.introStep;
 
   if (step === 1) {
-    const name = document.getElementById('learnerName').value.trim();
+    const nameInput = document.getElementById('learnerName');
+    const name = nameInput.value.trim();
     if (!name) {
-      document.getElementById('learnerName').style.borderColor = 'var(--red)';
+      nameInput.style.borderColor = 'var(--red)';
       return;
     }
     state.learnerName = name;
@@ -117,6 +122,12 @@ function startModule(n) {
 }
 
 function backToHub() {
+  // Clean up any ongoing timers/audio when going back
+  clearInterval(simTimerInterval);
+  if (isOceanPlaying) {
+    stopOceanWaves();
+    isOceanPlaying = false;
+  }
   document.getElementById('gameArea').classList.add('hidden');
   document.getElementById('gameHub').classList.add('active');
 }
@@ -124,6 +135,7 @@ function backToHub() {
 /* ===== STAR BURST ===== */
 function spawnStars(x, y) {
   const wrap = document.getElementById('starsWrap');
+  if (!wrap) return;
   ['⭐','✨','🌟','💫'].forEach((s, i) => {
     const el = document.createElement('div');
     el.className = 'star';
@@ -364,14 +376,13 @@ const simScenarios = [
   {
     emoji: '👵🛒🚶',
     title: 'Lola sa Palengke',
-    desc: 'An old lola is carrying heavy bags of groceries from the palengke. She looks tired and is struggling to walk. The timer is running!',
+    desc: 'An old lola is carrying heavy bags of groceries from the palengke. She looks tired and is struggling to walk.',
     choices: [
       { text: '🤝 Help lola carry her bags and walk with her', correct: true  },
       { text: '🏃 Walk past quickly and ignore her',           correct: false },
       { text: '📱 Keep scrolling your phone',                  correct: false },
       { text: '😴 Pretend you did not notice her',             correct: false },
     ],
-    timer: true,
   },
   {
     emoji: '🏫👧📖',
@@ -383,7 +394,6 @@ const simScenarios = [
       { text: '😂 Laugh and whisper to your friends',      correct: false },
       { text: '🏃 Pretend you did not see her',            correct: false },
     ],
-    timer: false,
   },
   {
     emoji: '🎤😰📜',
@@ -395,7 +405,6 @@ const simScenarios = [
       { text: '😂 Laugh and tell others about it',                 correct: false },
       { text: '📢 Tell the teacher without offering to help',      correct: false },
     ],
-    timer: false,
   },
   {
     emoji: '🍚🧹🏠',
@@ -407,12 +416,11 @@ const simScenarios = [
       { text: '😤 Complain and go to your room',         correct: false },
       { text: '🛌 Pretend to be asleep on the couch',    correct: false },
     ],
-    timer: false,
   },
 ];
 
 let simIdx           = 0;
-let simTimerInterval = null;
+let simTimerInterval = null; // Kept for cleanup but no longer used for countdown
 
 function renderModule2() {
   simIdx = 0;
@@ -426,7 +434,7 @@ function renderSim() {
     return;
   }
 
-  clearInterval(simTimerInterval);
+  clearInterval(simTimerInterval); // Clean up any existing interval
   const s = simScenarios[simIdx];
 
   document.getElementById('gameContent').innerHTML = `
@@ -444,11 +452,10 @@ function renderSim() {
         ${s.choices.map((c, i) => `<button class="sim-choice" onclick="checkSim(${i},${c.correct})">${c.text}</button>`).join('')}
       </div>
     </div>`;
-
 }
 
 function checkSim(idx, correct) {
-  clearInterval(simTimerInterval);
+  clearInterval(simTimerInterval); // Clean up any interval (for safety)
   document.querySelectorAll('.sim-choice').forEach((b, i) => {
     b.disabled = true;
     if (simScenarios[simIdx].choices[i].correct) b.classList.add('correct');
@@ -470,6 +477,12 @@ let oceanSource    = null;
 let oceanGain      = null;
 
 function renderModule3() {
+  // Clean up any existing audio when re-rendering
+  if (isOceanPlaying) {
+    stopOceanWaves();
+    isOceanPlaying = false;
+  }
+  
   document.getElementById('gameContent').innerHTML = `
     <div style="text-align:center;margin-bottom:20px">
       <span style="background:var(--blue);border-radius:50px;padding:6px 18px;font-weight:700;font-size:.9rem">
@@ -547,6 +560,8 @@ function startBreath() {
 
 function toggleOcean() {
   const btn = document.getElementById('oceanBtn');
+  if (!btn) return;
+  
   if (!isOceanPlaying) {
     playOceanWaves();
     btn.textContent = '🔇 Stop Ocean Waves';
@@ -597,19 +612,34 @@ function playOceanWaves() {
     oceanSource.start();
   } catch (e) {
     console.log('Audio not supported:', e);
+    isOceanPlaying = false;
   }
 }
 
 function stopOceanWaves() {
   try {
-    if (oceanGain) oceanGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
-    setTimeout(() => { if (oceanSource) oceanSource.stop(); }, 1100);
-  } catch (e) {}
+    if (oceanGain) {
+      oceanGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+    }
+    setTimeout(() => { 
+      if (oceanSource) {
+        oceanSource.stop(); 
+        oceanSource = null;
+      }
+      if (audioCtx && audioCtx.state !== 'closed') {
+        audioCtx.close();
+        audioCtx = null;
+      }
+    }, 1100);
+  } catch (e) {
+    console.log('Error stopping audio:', e);
+  }
 }
 
 function fidgetClick(btn) {
   btn.style.transform = 'scale(1.4) rotate(20deg)';
-  spawnStars(btn.getBoundingClientRect().left + 40, btn.getBoundingClientRect().top + 40);
+  const rect = btn.getBoundingClientRect();
+  spawnStars(rect.left + rect.width/2, rect.top + rect.height/2);
   setTimeout(() => (btn.style.transform = ''), 300);
 }
 
@@ -636,7 +666,7 @@ function finishModule(n) {
   if (n === 2) unlockModule(3);
 
   const card = document.getElementById('mod' + n + 'Card');
-  if (!card.querySelector('.mc-badge')) {
+  if (card && !card.querySelector('.mc-badge')) {
     const badge = document.createElement('span');
     badge.className   = 'mc-badge';
     badge.textContent = '✅ Done';
@@ -651,8 +681,10 @@ function finishModule(n) {
 
 function unlockModule(n) {
   const card = document.getElementById('mod' + n + 'Card');
+  if (!card) return;
   card.classList.remove('locked');
-  card.querySelector('.lock-badge')?.remove();
+  const lockBadge = card.querySelector('.lock-badge');
+  if (lockBadge) lockBadge.remove();
   card.setAttribute('onclick', `startModule(${n})`);
 }
 
@@ -720,6 +752,12 @@ function downloadPDF() {
 }
 
 function restartGame() {
+  // Clean up audio if playing
+  if (isOceanPlaying) {
+    stopOceanWaves();
+    isOceanPlaying = false;
+  }
+  
   state.learnerName      = '';
   state.introStep        = 0;
   state.modulesCompleted = [false, false, false];
@@ -728,8 +766,10 @@ function restartGame() {
 
   ['mod1Card','mod2Card','mod3Card'].forEach((id, i) => {
     const c = document.getElementById(id);
+    if (!c) return;
     c.className = 'module-card' + (i > 0 ? ' locked' : '');
-    c.querySelector('.mc-badge')?.remove();
+    const badge = c.querySelector('.mc-badge');
+    if (badge) badge.remove();
     if (i > 0) {
       if (!c.querySelector('.lock-badge')) {
         const lb = document.createElement('span');
@@ -745,7 +785,10 @@ function restartGame() {
   document.getElementById('progressLabel').textContent = '0 of 3 modules completed';
   document.getElementById('gameHub').classList.remove('active');
   document.getElementById('gameArea').classList.add('hidden');
-  document.getElementById('introScreen').style.display = '';
+  
+  const introScreen = document.getElementById('introScreen');
+  if (introScreen) introScreen.style.display = '';
+  
   document.getElementById('emiBubble').textContent     = "Hello My friend, my name is EMI! Let's play a Game! 🎉";
   document.getElementById('nameInputWrap').classList.add('hidden');
   document.getElementById('introNextBtn').textContent  = 'Next ➜';
@@ -756,7 +799,15 @@ function restartGame() {
 /* ============================================================
    UTILITY
    ============================================================ */
-function shuffle(arr)  { return arr.sort(() => Math.random() - 0.5); }
+function shuffle(arr)  { 
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 /* ============================================================
@@ -764,8 +815,15 @@ function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   createBubbles();
-  document.getElementById('feedbackNextBtn').addEventListener('click', () => {
-    document.getElementById('feedbackOverlay').classList.remove('show');
-    if (state.feedbackCallback) state.feedbackCallback();
-  });
+  const feedbackBtn = document.getElementById('feedbackNextBtn');
+  if (feedbackBtn) {
+    feedbackBtn.addEventListener('click', () => {
+      document.getElementById('feedbackOverlay').classList.remove('show');
+      if (state.feedbackCallback) {
+        const cb = state.feedbackCallback;
+        state.feedbackCallback = null;
+        cb();
+      }
+    });
+  }
 });
