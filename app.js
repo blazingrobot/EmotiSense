@@ -300,21 +300,21 @@ function matchClick(el, type) {
 /* ---------- Game 1c: Situation Analysis ---------- */
 const situations = [
   {
-    emoji: '🧺🌿😄', title: 'Family Picnic',
-    desc: 'A family is laughing and having fun together at a park. They are eating food and playing games.',
+    emoji: '🍚🎉👨‍👩‍👧‍👦', title: 'Fiesta sa Barangay',
+    desc: 'It is the barangay fiesta! The whole family is eating lechon, dancing, and laughing together in the plaza. Everyone is happy and celebrating.',
     answer: 'happiness', choices: ['Happiness','Sadness','Anger','Fear'],
   },
   {
-    emoji: '🌸🎁😲', title: 'Surprise Gift',
-    desc: 'Someone receives flowers and chocolates unexpectedly from a friend. Their eyes are wide open!',
+    emoji: '🎂🎁😲', title: 'Surprise Birthday',
+    desc: 'A child walks into the house and all their relatives shout "Surprise!" for their birthday. There are balloons, bibingka, and gifts on the table!',
     answer: 'surprise', choices: ['Happiness','Disgust','Surprise','Fear'],
   },
   {
-    emoji: '⚡😨🌧️', title: 'Thunder Storm',
-    desc: 'A child is alone at home and hears a very loud thunder outside. The lights flicker.',
+    emoji: '⛈️🕯️😨', title: 'Bagyo sa Gabi',
+    desc: 'There is a strong bagyo (typhoon) at night. The electricity went out and a child is alone in the dark room hearing loud thunder and heavy rain hitting the roof.',
     answer: 'fear', choices: ['Surprise','Fear','Sadness','Anger'],
   },
-];
+
 
 function renderSituation(idx) {
   if (idx >= situations.length) { m1GameIdx++; renderM1Game(); return; }
@@ -356,50 +356,50 @@ function checkSituation(chosen, answer, idx) {
 
 const simScenarios = [
   {
-    emoji: '👴🚶🚦',
-    title: 'Help at the Crosswalk',
-    desc: 'An elderly person needs to cross the pedestrian lane but looks confused.',
+    emoji: '👵🛒🚶',
+    title: 'Lola sa Palengke',
+    desc: 'An old lola is carrying heavy bags of groceries from the palengke. She looks tired and is struggling to walk.',
     choices: [
-      { text: '🤝 Help the elderly person cross safely', correct: true  },
-      { text: '🏃 Walk past quickly',                    correct: false },
-      { text: '📱 Keep scrolling your phone',            correct: false },
-      { text: '😴 Pretend you did not see',              correct: false },
+      { text: '🤝 Help lola carry her bags and walk with her', correct: true  },
+      { text: '🏃 Walk past quickly and ignore her',           correct: false },
+      { text: '📱 Keep scrolling your phone',                  correct: false },
+      { text: '😴 Pretend you did not notice her',             correct: false },
     ],
     timer: true,
   },
   {
-    emoji: '🏫👦❓',
-    title: 'Classmate Without a Partner',
-    desc: 'Your teacher said everyone needs a partner, but one classmate is left alone and looks sad.',
+    emoji: '🏫👧📖',
+    title: 'Walang Kasama sa Grupo',
+    desc: 'Your teacher said to form groups for a activity, but one classmate is left alone with no group. She looks sad and embarrassed.',
     choices: [
-      { text: '💁 Invite the classmate to join your group', correct: true  },
-      { text: '🙈 Ignore and work with your friends only',  correct: false },
-      { text: '😂 Laugh at the situation',                  correct: false },
-      { text: '🏃 Leave the classroom',                     correct: false },
+      { text: '💁 Invite her to join your group',          correct: true  },
+      { text: '🙈 Ignore her and stay with your barkada', correct: false },
+      { text: '😂 Laugh and whisper to your friends',      correct: false },
+      { text: '🏃 Pretend you did not see her',            correct: false },
     ],
     timer: false,
   },
   {
-    emoji: '🎤📄😰',
-    title: 'Forgotten Recital Script',
-    desc: 'Your classmate forgot their recital script and is about to perform. They look very nervous.',
+    emoji: '🎤😰📜',
+    title: 'Nakalimutang Script sa Program',
+    desc: 'It is your school\'s Linggo ng Wika program. Your classmate forgot their spoken poetry piece and is about to go on stage. They look very panicked.',
     choices: [
-      { text: '📋 Share your copy and help them practice',     correct: true  },
-      { text: '🤷 Say it is not your problem',                 correct: false },
-      { text: '😂 Laugh at them in front of everyone',         correct: false },
-      { text: '📢 Tell the teacher without offering any help', correct: false },
+      { text: '📋 Share your copy and quietly help them rehearse', correct: true  },
+      { text: '🤷 Say it is not your problem',                      correct: false },
+      { text: '😂 Laugh and tell others about it',                  correct: false },
+      { text: '📢 Tell the teacher without offering to help',       correct: false },
     ],
     timer: false,
   },
   {
-    emoji: '🍽️🧹🏠',
-    title: 'Household Chore Time',
-    desc: 'Your parent asks you to help clean the dishes after dinner. You are a little tired but they look exhausted.',
+    emoji: '🍚🧹🏠',
+    title: 'Tulong sa Bahay',
+    desc: 'After dinner, your nanay asks you to wash the dishes and sweep the floor. You are tired from school but you can see she just came home from a long day of work.',
     choices: [
-      { text: '🧽 Help gladly and do your best', correct: true  },
-      { text: '📺 Say you are busy watching TV', correct: false },
-      { text: '😤 Complain and walk away',        correct: false },
-      { text: '🛌 Pretend to be asleep',          correct: false },
+      { text: '🧽 Help po, nanay! and do your best',  correct: true  },
+      { text: '📺 Say you are watching your telenovela', correct: false },
+      { text: '😤 Complain and go to your room',         correct: false },
+      { text: '🛌 Pretend to be asleep on the couch',    correct: false },
     ],
     timer: false,
   },
